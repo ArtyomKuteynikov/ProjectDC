@@ -19,7 +19,6 @@ class GradesAdmin(admin.ModelAdmin):
 class SpecsAdmin(admin.ModelAdmin):
     pass
 
-
 class SystemUserAdmin(UserAdmin):
     def get_queryset(self, request):
         return super().get_queryset(request).filter(is_staff=True)

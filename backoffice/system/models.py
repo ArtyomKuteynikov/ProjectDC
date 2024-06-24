@@ -15,6 +15,9 @@ class City(models.Model):
         ordering = ('id',)
         verbose_name = 'Город'
         verbose_name_plural = 'Города'
+    
+    def __str__(self):
+        return self.name
 
 
 class Grade(models.Model):
@@ -25,6 +28,9 @@ class Grade(models.Model):
         ordering = ('id',)
         verbose_name = 'Степень образования'
         verbose_name_plural = 'Степени образования'
+    
+    def __str__(self):
+        return self.name
 
 
 class Spec(models.Model):
@@ -35,6 +41,9 @@ class Spec(models.Model):
         ordering = ('id',)
         verbose_name = 'Специальность'
         verbose_name_plural = 'Специальности'
+    
+    def __str__(self):
+        return self.name
 
 
 class Customer(User):
@@ -74,6 +83,10 @@ class Customer(User):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+    
+    def save(self, *args, **kwargs):
+        self.username = self.email
+        super().save(*args, **kwargs)
 
 
 class Candidates(Customer):
