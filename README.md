@@ -57,10 +57,17 @@ pip install psycopg
 ## Don't forget to set .env from .env.examples
 
 ## Starting project
+
+### Backoffice
 ```
 python manage.py migrate
 
 python manage.py createsuperuser
 
 python manage.py runserver
+```
+
+### Frontoffice
+```
+uvicorn api:app --host 0.0.0.0 --port 5000 --workers 5 --proxy-headers --reload
 ```

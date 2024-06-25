@@ -1,0 +1,9 @@
+asyncpg
+fastapi
+requests
+uvicorn
+git+https://github.com/elnurhasan/fastapi-jwt-auth.git
+pydantic
+sqlmodel
+python-multipart
+aiohttp

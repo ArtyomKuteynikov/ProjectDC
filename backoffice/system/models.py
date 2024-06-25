@@ -66,7 +66,7 @@ class Customer(User):
                                  blank=True, related_name='job_city')
     role = models.CharField(max_length=32, choices=ROLES)
     grade = models.ForeignKey(Grade, on_delete=models.CASCADE, verbose_name="Уровень образования")
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
 
     def set_password_hash(self, password):
         self.password = pwd_context.hash(password)
