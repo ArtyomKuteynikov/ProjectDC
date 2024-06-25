@@ -7,18 +7,23 @@
 </head>
 <body>
     <main>
-        <h1>Регистрация</h1>
+        <h1>Введите код и новый пароль</h1>
         <form method="POST">
             {% csrf_token %}
             <label>Секретный ключ:</label>
             <input name="SECRET_KEY" type="password"></input><p></p>
-            {{ form.as_p }}
+            <label>Код:</label>
+            <input name="code"></input><p></p>
+            <label>Новый пароль:</label>
+            <input name="password", type="password"></input><p></p>
+            <label>Введите пароль ещё раз:</label>
+            <input name="password_again"></input><p></p>           
 
             {% for message in messages %}
                 <p style="color:red;">{{ message }}</p>
             {% endfor %}
-            
-            <button type="submit">Создать аккаунт</button>
+
+            <button type="submit">Отправить код на почту</button>
         </form>
     </main>
 
