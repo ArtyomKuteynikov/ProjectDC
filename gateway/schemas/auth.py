@@ -33,3 +33,8 @@ class SignUp(BaseModel):
 class SignIn(BaseModel):
     email: str
     password: str
+
+
+class RestorePassword(BaseModel):
+    password: str
+    new_password: str

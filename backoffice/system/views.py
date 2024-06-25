@@ -5,9 +5,10 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
+from django.core.cache import cache
 
 from .models import Customer
-from .forms import CustomerForm, LoginForm
+from .forms import CustomerForm, LoginForm, ChangePassword
 from .utils import send_email
 
 
@@ -56,40 +57,57 @@ def login(request):
         return HttpResponse({'status': False}, status=405)
 
 
+@csrf_exempt
 def restore_password(request):
+    if request.headers['SECRET-SYSTEM'] != getenv('SECRET_SYSTEM'):
+        return HttpResponse({'status': False}, status=403)
+    email = request.GET['email']
+    print(email)
+    customer = Customer.objects.filter(email=email).first()
+    if not customer:
+        return HttpResponse({'status': False}, status=404)
+    number = randint(100000, 999999)
+    cache.set(f'code:{email}', number, timeout=3600*600)
+    text = f'''Добрый день!
+    
+Ваш код сброса пароля: {number}
+
+С уважением,
+JoinHub
+'''
+    send_email(email, "Сброс пароля", text)
+    return JsonResponse(data={'status': True}, status=200)
+
+
+@csrf_exempt
+def enter_code(request):
+    if request.headers['SECRET-SYSTEM'] != getenv('SECRET_SYSTEM'):
+        return HttpResponse({'status': False}, status=403)
+    email = request.GET['email']
+    code = request.GET['code']
+    print(str(code) != str(cache.get(f'code:{email}')), str(code), str(cache.get(f'code:{email}')))
+    if str(code) != str(cache.get(f'code:{email}')):
+        return HttpResponse({'status': False}, status=400)
+    customer = Customer.objects.all().filter(email=email).first()
+    if not customer:
+        return HttpResponse({'status': False}, status=404)
+    return JsonResponse(data={'status': True, 'user': customer.id}, status=200)
+
+
+@csrf_exempt
+def change_password(request):
     if request.method == 'POST':
-        if request.POST['SECRET_KEY'] != getenv('SECRET_SYSTEM'):
-            return render(request, 'system/restore_password.html', {'messages': ['Несовпадение секретных ключей!']},
-                          status=403)
-        email = request.POST['email']
-        customer = Customer.objects.all().filter(email=email)
-
-        if len(customer) == 0:
-            return render(request, 'system/restore_password.html',
-                          {'messages': ['Аккаунт с таким email не зарегистрирован']}, status=401)
-
-        number = randint(1000, 9999)
-        send_email(email, "Restoring password", str(number))
-        return enter_code(request, email, number)
-
-    return render(request, 'system/restore_password.html')
-
-
-def enter_code(request, email, number):
-    if request.method == 'POST':
-        if request.POST['SECRET_KEY'] != getenv('SECRET_SYSTEM'):
-            return render(request, 'system/enter_code.html', {'messages': ['Несовпадение секретных ключей!']},
-                          status=403)
-
-        if request.POST['code'] != number:
-            return render(request, 'system/enter_code.html', {'messages': ['Введён неверный код!']}, status=401)
-
-        password = request.POST['password']
-
-        if password != request.POST['password_again']:
-            return render(request, 'system/enter_code.html', {'messages': ['Пароли отличаются']}, status=401)
-
-        Customer.objects.all().filter(email=email)[0].password = password
-        return render(request, 'system/login.html', {'success': True}, status=200)
-
-    return render(request, 'system/enter_code.html')
+        form = ChangePassword(request.POST)
+        if request.headers['SECRET-SYSTEM'] != getenv('SECRET_SYSTEM'):
+            return HttpResponse({'status': False}, status=403)
+        if not form.is_valid():
+            return HttpResponse({'status': False}, status=400)
+        if form.password != form.new_password:
+            return HttpResponse({'status': False}, status=400)
+        customer = Customer.objects.all().filter(id=form.customer).first()
+        if not customer:
+            return HttpResponse({'status': False}, status=404)
+        customer.set_password_hash(form.password)
+        return JsonResponse(data={'status': True, 'user': customer.id}, status=200)
+    else:
+        return HttpResponse({'status': False}, status=405)

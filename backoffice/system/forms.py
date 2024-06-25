@@ -17,3 +17,9 @@ class LoginForm(forms.ModelForm):
             "email": forms.TextInput(attrs={'autocomplete': 'on'}),
             "password": forms.PasswordInput(),
         }
+
+
+class ChangePassword(forms.Form):
+    customer = forms.IntegerField()
+    password = forms.CharField()
+    new_password = forms.CharField()
