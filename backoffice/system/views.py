@@ -7,7 +7,7 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
 
-from .models import Customer
+from .models import Customer, City, Grade, Spec
 from .forms import CustomerForm, LoginForm, ChangePassword
 from .utils import send_email
 
@@ -111,3 +111,18 @@ def change_password(request):
         return JsonResponse(data={'status': True, 'user': customer.id}, status=200)
     else:
         return HttpResponse({'status': False}, status=405)
+
+@csrf_exempt
+def cities_list(request):
+    cities = City.objects.all()
+    return JsonResponse(data={'cities': [{'id': city.id, 'name': city.name} for city in cities]}, status=200)
+
+@csrf_exempt
+def grades_list(request):
+    grades = Grade.objects.all()
+    return JsonResponse(data={'grades': [{'id': grade.id, 'name': grade.name} for grade in grades]}, status=200)
+
+@csrf_exempt
+def specs_list(request):
+    specs = Spec.objects.all()
+    return JsonResponse(data={'specs': [{'id': spec.id, 'name': spec.name} for spec in specs]}, status=200)
