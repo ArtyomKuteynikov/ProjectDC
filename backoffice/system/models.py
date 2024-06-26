@@ -59,14 +59,12 @@ class Customer(User):
 
     phone = models.CharField(max_length=32, verbose_name="Телефон", null=True, blank=True)
     telegram = models.CharField(max_length=32, verbose_name="Телеграм", null=True, blank=True)
-    birthday = models.DateField(verbose_name="Дата рождения")
+    birthday = models.DateField(verbose_name="Дата рождения", null=True, blank=True)
     gender = models.CharField(choices=GENDERS, default='M', verbose_name="Пол")
     city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name="Город", related_name='city')
     job_city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name="Город поиска работы", null=True,
                                  blank=True, related_name='job_city')
-    role = models.CharField(max_length=32, choices=ROLES)
     grade = models.ForeignKey(Grade, on_delete=models.CASCADE, verbose_name="Уровень образования")
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
 
     def set_password_hash(self, password):
         self.password = pwd_context.hash(password)
@@ -89,21 +87,10 @@ class Customer(User):
         super().save(*args, **kwargs)
 
 
-class Candidates(Customer):
-    class Meta:
-        proxy = True
-        verbose_name = 'Соискатель'
-        verbose_name_plural = 'Соискатели'
+class HR:
+    user_id = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name='HR')
+    company_id = models.ForeignKey(Company, on_delete=models.CASCADE, verbose_name='Компания')
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
-
-
-class HR(Customer):
-    class Meta:
-        proxy = True
-        verbose_name = 'HR'
-        verbose_name_plural = 'HRs'
-
-    def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        user = Customer.objects.filter(id=self.user_id)
+        return f'{user.first_name} {user.last_name}'

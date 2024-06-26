@@ -26,7 +26,7 @@ def register(request):
         if not form.is_valid():
             return HttpResponse({'status': False}, status=400)
         email = form.cleaned_data['email']
-        customer = Customer.objects.all().filter(email=email)
+        customer = Customer.objects.filter(email=email)
         if len(customer) > 0:
             return HttpResponse({'status': False}, status=400)
         else:

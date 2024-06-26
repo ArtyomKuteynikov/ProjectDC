@@ -6,7 +6,7 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ['first_name', 'last_name', 'email', 'password', 'phone', 'gender', 'telegram', 'birthday', 'city',
-                  'job_city', 'grade', 'role']
+                  'job_city', 'grade']
 
 
 class LoginForm(forms.ModelForm):
