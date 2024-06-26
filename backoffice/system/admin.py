@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-from .models import Customer, City, Grade, Spec, HR, Candidates
+from .models import Customer, City, Grade, Spec, HR
 
 
 @admin.register(City)
@@ -19,6 +19,7 @@ class GradesAdmin(admin.ModelAdmin):
 class SpecsAdmin(admin.ModelAdmin):
     pass
 
+
 class SystemUserAdmin(UserAdmin):
     def get_queryset(self, request):
         return super().get_queryset(request).filter(is_staff=True)
@@ -28,8 +29,8 @@ class SystemUserAdmin(UserAdmin):
         super().save_model(request, obj, form, change)
 
 
-@admin.register(Candidates)
-class CandidatesAdmin(admin.ModelAdmin):
+@admin.register(Customer)
+class CustomerAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name', 'email', 'phone', 'is_active']
 
     exclude = ['last_login', 'username', 'is_superuser', 'is_staff', 'groups', 'role',
@@ -52,44 +53,17 @@ class CandidatesAdmin(admin.ModelAdmin):
     unblock.short_description = 'Разблокировать'
 
     def get_queryset(self, request):
-        return super().get_queryset(request).filter(role='candidate')
+        return super().get_queryset(request).filter(is_staff=False)
 
     def save_model(self, request, obj, form, change):
-        obj.role = 'candidate'
+        obj.is_staff = False
         obj.username = obj.email
         super().save_model(request, obj, form, change)
 
 
 @admin.register(HR)
 class HRAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'last_name', 'email', 'phone', 'is_active']
-
-    exclude = ['last_login', 'username', 'is_superuser', 'is_staff', 'groups', 'role',
-               'user_permissions', 'date_joined', 'uuid', 'show', 'password', 'is_active']
-
-    actions = ['block', 'unblock']
-
-    def block(self, request, queryset):
-        for customer in queryset:
-            customer.is_active = False
-            customer.save()
-
-    block.short_description = 'Заблокировать'
-
-    def unblock(self, request, queryset):
-        for customer in queryset:
-            customer.is_active = True
-            customer.save()
-
-    unblock.short_description = 'Разблокировать'
-
-    def get_queryset(self, request):
-        return super().get_queryset(request).filter(role='candidate')
-
-    def save_model(self, request, obj, form, change):
-        obj.role = 'candidate'
-        obj.username = obj.email
-        super().save_model(request, obj, form, change)
+    list_display = ['customer', 'company']
 
 
 admin.site.unregister(User)

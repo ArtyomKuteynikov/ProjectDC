@@ -10,11 +10,6 @@ class Gender(str, Enum):
     female = "F"
 
 
-class Roles(str, Enum):
-    candidate = "candidate"
-    hr = "hr"
-
-
 class SignUp(BaseModel):
     first_name: str
     last_name: str
@@ -27,7 +22,6 @@ class SignUp(BaseModel):
     city: int
     job_city: int
     grade: int
-    role: Roles
 
 
 class SignIn(BaseModel):

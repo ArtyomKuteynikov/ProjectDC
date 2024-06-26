@@ -87,10 +87,15 @@ class Customer(User):
         super().save(*args, **kwargs)
 
 
-class HR:
-    user_id = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name='HR')
-    company_id = models.ForeignKey(Company, on_delete=models.CASCADE, verbose_name='Компания')
+class HR(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name='HR')
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, verbose_name='Компания')
+
+    class Meta:
+        db_table = "hr"
+        ordering = ('id',)
+        verbose_name = 'HR'
+        verbose_name_plural = 'HRs'
 
     def __str__(self):
-        user = Customer.objects.filter(id=self.user_id)
-        return f'{user.first_name} {user.last_name}'
+        return f'{self.user.first_name} {self.user.last_name}'
