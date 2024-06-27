@@ -1,0 +1,202 @@
+.place-vacancy {
+  padding: 115px 0 0;
+  margin: 0 70px 0;
+}
+
+.place-vacancy__header {
+  margin: 0 0 70px;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #DADADA;
+  color: #FFF;
+
+  font-family: Inter, Arial, sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+}
+
+.place-vacancy__description {
+  padding: 0;
+  margin: 0 0 70px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  grid-template-rows: 80px 140px; 
+  grid-auto-flow: column;
+  column-gap: 40px;
+  row-gap: 10px;
+}
+
+.place-vacancy__subtitle {
+  margin: 0;
+  color: #FFF;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.8px;
+}
+
+.place-vacancy__text {
+  margin: 0;
+  color: #FFF;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.place-vacancy__bold-text {
+  font-weight: bold;
+}
+
+.place-vacancy__timeline {
+  display: grid;
+  grid-template-columns: 1fr 4fr; 
+}
+
+.place-vacancy__weeks {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 36px;
+  background: #3DDC84;
+  color: #000;
+
+  text-align: center;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.place-vacancy__weeks:last-of-type {
+  background: #303030;
+  color: #FFF;
+}
+
+.place-vacancy__span {
+  margin: 14px auto 110px;
+
+  color: #8B8B8B;
+  text-align: center;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+}
+
+.place-vacancy__sign-button {
+  padding: 15px 40px;
+  text-decoration: none;
+  color: #FFF;
+  text-align: right;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 133.333% */
+  
+  width: 100px;
+  text-align: center;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 58px;
+}
+
+.place-vacancy__sign-button:hover {
+  opacity: .8;
+}
+
+.place-vacancy__sign-button_type_signin {
+  border-radius: 3px;
+  background: #3DDC84;
+
+  color: #000;
+}
+
+.place-vacancy__button-area {
+  margin: 14px auto 40px;
+
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .place-vacancy {
+    padding: 91px 0 0;
+    margin: 0 50px 0;
+  }
+  .place-vacancy__description {
+    margin: 0 0 93px;
+    column-gap: 32px;
+    row-gap: 14px;
+  }
+  .place-vacancy__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .place-vacancy__span {
+    margin: 14px auto 90px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .place-vacancy {
+    padding: 70px 0 0;
+    margin: 0 18px 0;
+
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .place-vacancy__header {
+    margin: 0 0 60px;
+    padding-bottom: 28px;
+    
+    font-size: 18px; 
+    letter-spacing: -0.72px;
+  }
+  .place-vacancy__description {
+    margin: 0;
+    grid-template-columns: 1fr; 
+    grid-template-rows: 60px 104px 60px 108px;
+    font-size: 11px;
+    row-gap: 0; 
+  }
+  
+  .place-vacancy__subtitle {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+  
+  .place-vacancy__text {
+    color: #FFF;
+    letter-spacing: 0;
+
+    font-family: Inter, Arial, sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+  }
+  .place-vacancy__timeline {
+    grid-template-columns: 1.1fr 2fr; 
+  }
+  .place-vacancy__weeks {
+    font-size: 11px;
+  }
+  .place-vacancy__span {
+    margin: 9px auto 110px;
+    font-size: 11px;
+    font-weight: 400;
+  }
+}

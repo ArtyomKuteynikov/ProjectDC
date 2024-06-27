@@ -1,0 +1,112 @@
+.articles {
+  margin: 0 0 125px;
+  padding: 0 70px 0;
+}
+
+.articles__header {
+  margin: 0 0 46px;
+  color: #8B8B8B;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.articles__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.articles__list-item {
+  margin: 19px 0 0;
+  padding: 0 0 10px;
+  border-bottom: 1px solid #424242;
+}
+
+.articles__list-item:last-child {
+  border: none;
+  padding: 0;
+}
+
+.articles__link {
+  color: #FFF;
+  display: flex;
+  justify-content: space-between;
+
+  text-decoration: none;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 50px;
+  letter-spacing: -1.2px;
+}
+
+.articles__link:hover {
+  opacity: .7;
+}
+
+.articles__link:first-of-type {
+  margin: 0;
+}
+
+.articles__link-arrow {
+  color: #FFF;
+
+  font-family: Inter, Arial, sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 60px;
+  letter-spacing: -1.2px;
+}
+
+@media screen and (max-width: 768px) {
+  .articles__header {
+    margin: 0 0 50px;
+  }
+  .articles {
+    margin: 0 0 80px;
+  }  
+  .articles__link {
+    font-size: 28px;
+    letter-spacing: -1.12px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .articles__header {
+    margin: -21px 0 39px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .articles__list-item {
+    margin: 21px 0 0;
+  }
+
+  .articles__link {
+    color: #FFF;
+    padding-bottom: 8px;
+
+    font-family: Inter, Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px; /* 155.556% */
+    letter-spacing: -0.72px;
+  }
+  .articles__link-arrow {
+    color: #FFF;
+
+    font-family: Inter, Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px; /* 155.556% */
+    letter-spacing: -0.72px;
+  }
+}

@@ -1,0 +1,154 @@
+.navigation {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  /* top: -74px; */
+  top: 0;
+  padding-left: auto;
+  z-index: 10;
+}
+
+.navigation_invisible {
+  display: none;
+}
+
+.navigation__background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.3;
+  background: #000;
+}
+
+.navigation__bar {
+  position: fixed;
+  right: 0;
+  padding-top: 159px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 0 0 0 auto;
+  height: 100vh;
+  width: 520px;
+  background: #202020;
+}
+
+.navigation__link {
+  padding-bottom: 4px;
+  margin: 25px 0 0;
+  display: flex;
+  justify-content: center;
+
+  text-decoration: none;
+  color: #FFF;
+  text-align: center;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.navigation__link:hover {
+  opacity: .7;
+}
+
+.navigation__link:first-of-type {
+  margin: 0;
+}
+
+.navigation__link:last-of-type {
+  margin-bottom: 90px;
+}
+
+.navigation__link_active {
+  border-bottom: 2px solid #FFF;
+}
+
+.navigation__account-button {
+  margin: auto 0 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 32px;
+  width: 100px;
+
+  border-radius: 20px;
+  background: #313131;
+
+  text-decoration: none;
+  color: #FFF;
+  text-align: center;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 114.286% */
+}
+
+.navigation__account-button:hover {
+  opacity: .8;
+}
+
+.navigation__close-button {
+  position: absolute;
+  top: 27px;
+  right: 27px;
+  cursor: pointer;
+
+  width: 22px;
+  height: 22px;
+  background-image: url(../../images/close.svg);
+  background-position: center;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.navigation__close-button:hover {
+  opacity: .8;
+}
+
+.navigation__sign-button {
+  padding: 8px 20px;
+
+  text-decoration: none;
+  color: #FFF;
+  text-align: right;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.navigation__sign-button:hover {
+  opacity: .8;
+}
+
+.header__sign-button_type_signin {
+  border-radius: 3px;
+  background: #3DDC84;
+
+  color: #000;
+}
+
+@media screen and (max-width: 450px) {
+  .navigation__bar {  
+    padding: 145px 0 0;
+    width: 100%;
+  }
+  .navigation__link {
+    margin: 20px 0 0;
+  }
+  .navigation__account-button {
+    margin: auto 0 90px;
+  }
+  .navigation__close-button {
+    top: 18px;
+    right: 18px;
+  }
+}

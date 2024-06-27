@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import Navigation from '../Navigation/Navigation'
+import Main from '../Main/Main'
 
 
 import './App.css';
@@ -13,8 +15,9 @@ function App() {
   if (localStorage.getItem("jwt")) {
     isLoggedInInitially = true;
   }
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
+  // FIXME: isLoggedInInitially instead of boolean
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
   function handleCloseNavigationClick() {
@@ -37,7 +40,11 @@ function App() {
               handleNavigationClick={handleOpenNavigationClick}
             />
             <main>
-
+              <Navigation 
+                isOpen={isNavigationOpen}
+                handleCloseClick={handleCloseNavigationClick}
+              />
+              <Main />
             </main>
             <Footer />
           </>
