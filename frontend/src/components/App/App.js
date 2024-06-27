@@ -4,6 +4,8 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation'
 import Main from '../Main/Main'
+import Login from '../Login/Login';
+import Register from '../Register/Register';
 
 
 import './App.css';
@@ -49,6 +51,8 @@ function App() {
             <Footer />
           </>
         } />
+        <Route path="/signin" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
       </Routes>
     </div>
     </AppContext.Provider>

@@ -1,0 +1,143 @@
+.auth-page {
+  width: 396px;
+  margin: 70px auto 0;
+}
+
+.auth-page__logo {
+  height: 38px;
+  width: 38px;
+}
+
+.auth-page__logo:hover {
+  opacity: .7;
+}
+
+.auth-page__title {
+  margin: 38px 0 40px;
+
+  color: #FFF;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.auth-page__form {
+  display: flex;
+  flex-direction: column;
+  min-height: 380px;
+  align-content: space-between;
+  position: relative;
+}
+
+.auth-page__button {
+  margin: auto 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+
+  width: 396px;
+  height: 45px;
+
+  border-radius: 3px;
+  border: none;
+  background: #4285F4;
+
+  color: #FFF;
+
+  text-align: center;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.auth-page__button:hover {
+  opacity: .8;
+}
+
+.auth-page__button_disabled {
+  opacity: .8;
+  cursor: default;
+}
+
+.auth-page__suggestion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px 0 0;
+
+  color: #8B8B8B;
+  text-align: center;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.auth-page__question {
+  margin: 0 6px 0 0;
+}
+
+.auth-page__link {
+  color: #4285F4;
+  text-decoration: none;
+}
+
+.auth-page__link:hover {
+  opacity: .7;
+}
+
+.auth-page__error-message {
+  visibility: hidden;
+  top: 252px;
+  position: absolute;
+  color: #EE3465;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.auth-page__error-message_active {
+  visibility: visible;
+}
+
+@media screen and (max-width: 768px) {
+  .auth-page {
+    margin: 230px auto 0;
+  }
+  .auth-page__suggestion {
+    margin: 16px 0 232px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .auth-page {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 56px auto 0;
+  }
+  .auth-page__title {
+    margin: 50px 0 80px;
+  }
+  .auth-page__form {
+    min-height: 468px;
+  }
+  .auth-page__button {
+    width: 260px;
+    font-size: 12px;
+  }
+  .auth-page__suggestion {
+    margin: 16px 0 30px;
+    font-size: 12px;
+  }
+}

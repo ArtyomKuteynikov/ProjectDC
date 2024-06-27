@@ -1,0 +1,34 @@
+.auth-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-input__input-description {
+  margin: 0 0 10px;
+  color: #8B8B8B;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.auth-input__input {
+  margin: 0 0 20px;
+  padding-left: 15px;
+  border: 0;
+  border-radius: 8px;
+  background: #2F2F2F;
+  height: 46px;
+
+  color: #FFF;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.auth-input__input:focus {
+  outline: solid grey;
+}
