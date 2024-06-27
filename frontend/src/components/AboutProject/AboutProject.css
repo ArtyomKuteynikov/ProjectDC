@@ -93,9 +93,9 @@
 }
 
 @media screen and (max-width: 1020px) {
-  .about-project__story {
-    /* width: 364px; */
-  }
+  /* .about-project__story {
+    /* width: 364px; 
+  } */
 }
 
 @media screen and (max-width: 768px) {
