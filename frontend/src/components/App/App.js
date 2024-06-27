@@ -13,6 +13,7 @@ import PageNotFound from '../PageNotFound/PageNotFound'
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute'
 
 
+import { checkToken } from '../../utils/MainApi';
 import './App.css';
 
 import { AppContext } from '../../contexts/AppContext';

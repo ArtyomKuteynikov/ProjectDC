@@ -1,5 +1,4 @@
 import React from 'react';
-import Portfolio from '../Articles/Articles';
 // import portfolioImagePath from '../../images/portfolio_image.png';
 import './AboutProject.css'
 
