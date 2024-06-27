@@ -71,3 +71,18 @@ python manage.py runserver
 ```
 uvicorn api:app --host 0.0.0.0 --port 5000 --workers 5 --proxy-headers --reload
 ```
+
+
+## Available Scripts in frontend directory
+In the project directory, you can run:
+
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
