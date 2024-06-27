@@ -42,7 +42,7 @@ function App() {
         })
     }
   }
-  
+
   useEffect(() => {
     tokenCheck();
   }, [isLoggedIn])
@@ -97,6 +97,7 @@ function App() {
         } />
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
     </AppContext.Provider>
