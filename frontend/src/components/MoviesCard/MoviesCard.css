@@ -1,0 +1,165 @@
+.card {
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+}
+
+.card__image {
+  width: 100%;
+  max-height: 201px;
+  object-fit: cover;
+}
+
+.card__text {
+  display: flex;
+  max-height: 21px;
+  justify-content: space-between;
+  margin: 12px 0 0;
+}
+
+.card__title {
+  max-width: 250px;
+  margin: 0 0 0 14px;
+
+  color: #FFF;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.card__duration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 14px 0 auto;
+  min-width: 52px;
+  height: 18px;
+  border-radius: 3px;
+  background-color: #2F2F2F;
+
+  color: #8B8B8B;
+  text-align: center;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 10px;
+}
+
+.card__save-button {
+  /* visibility: hidden; */
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  width: 72px;
+  height: 21px;
+  border-radius: 30px;
+  background: #313131;
+  border: none;
+  height: 21px;
+  width: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  
+  color: #FFF;
+  text-align: center;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 9px; /* 90% */
+}
+
+.card__save-button:hover {
+  opacity: .8;
+}
+
+.card:hover .card__save-button {
+  visibility: visible;
+  cursor: pointer;
+}
+
+.card__saved-button {
+  /* visibility: hidden; */
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background-image: url(../../images/saved_film.svg);
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  width: 21px;
+  height: 21px;
+  cursor: pointer;
+}
+
+.card__saved-button:hover {
+  opacity: .8;
+}
+
+.card__saved-icon {
+  visibility: hidden;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background-image: url(../../images/saved_film.svg);
+  background-color: rgba(0, 0, 0, 0);
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.card__delete-button {
+  /* visibility: hidden; */
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background-image: url(../../images/delete_card.svg);
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  width: 21px;
+  height: 21px;
+  cursor: pointer;
+  z-index: 4;
+}
+
+.card__delete-button:hover {
+  opacity: .8;
+}
+
+.card__link {
+  text-decoration: none;
+}
+
+/* 
+.card:hover .card__delete-button {
+  visibility: visible;
+  cursor: pointer;
+} */
+
+@media screen and (max-width: 768px) {
+  .card__text {
+    margin: 20px 0 0;
+  }
+  .card__title {
+    margin: 0;
+  }
+  .card__duration {
+    margin: 1px 0 0 auto;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .card__text {
+    margin: 10px 0 0;
+  }
+  .card__title {
+    margin: 0;
+  }
+  .card__duration {
+    margin: 1px 0 0 auto;
+  }
+}

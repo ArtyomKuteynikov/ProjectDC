@@ -1,0 +1,124 @@
+
+.search-form {
+  margin: 80px 70px 0;
+}
+
+.search-form__input-area {
+  margin: 0 0 29px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-form__field {
+  display: flex;
+  flex: max-content;
+  margin: 0;
+}
+
+.search-form__input {
+  flex: max-content;
+  height: 50px;
+  border-radius: 8px;
+  background: #2F2F2F;
+  border: none;
+  padding: 0 0 0 20px;
+
+  color: #FFF;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.search-form__input:focus {
+  outline: solid grey;
+}
+
+.search-form__button {
+  margin: 0 0 0 10px;
+  width: 44px;
+  height: 44px;
+  background-color: #202020;
+  border: none;
+  background-image: url(../../images/find-3.svg);
+  cursor: pointer;
+}
+
+.search-form__button:hover {
+  opacity: .8;
+}
+
+/* Обнуление стилей чекбокса */
+.search-form__checkbox {
+  position: absolute;
+  width: 1px; /* если у элемента не будет размеров, некоторые браузеры посчитают, что его вообще нет */
+  height: 1px;
+  overflow: hidden; /* без этого свойства тоже сработает, но так наверняка. Мы его ещё изучим, оно скрывает элементы, выходящие за границы родителя */
+  clip-path: inset(0 0 0 0);
+} 
+
+.search-form__checkbox + div {
+  background-image: url(../../images/smalltumboff.svg);
+} 
+
+.search-form__checkbox:checked + div {
+  background-image: url(../../images/smalltumb.svg);
+} 
+
+.search-form__checkbox + div {
+  width: 36px;
+  height: 20px;
+  cursor: pointer;
+} 
+
+.search-form__checkbox + div:hover {
+  opacity: .8;
+}
+
+.search-form__field-checkbox {
+  padding: 0 0 40px;
+  border-bottom: 1px solid #424242;
+  margin: 0 0 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-form__checkbox-description {
+  margin: 0 0 0 12px;
+  color: #FFF;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; 
+  cursor: pointer;
+}
+
+@media screen and (max-width: 769px) {
+  .search-form {
+    margin: 80px 30px 0;
+  }
+  .search-form__input-area {
+    margin: 0 0 40px;
+  }
+}
+
+
+@media screen and (max-width: 450px) {
+  .search-form {
+    margin: 80px 14px 0;
+  }
+  .search-form__input-area {
+    margin: 0 0 46px;
+  }
+  .search-form__input {
+    height: 44px;
+    padding-left: 13px;
+    font-size: 14px;  
+  }
+  .search-form__checkbox-description {
+    font-size: 11px;
+  }
+}

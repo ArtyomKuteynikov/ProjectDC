@@ -7,6 +7,7 @@ import Main from '../Main/Main'
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Profile from '../Profile/Profile';
+import Movies from '../Movies/Movies'
 
 import PageNotFound from '../PageNotFound/PageNotFound'
 
@@ -25,7 +26,8 @@ function App() {
   }
 
   // FIXME: isLoggedInInitially instead of boolean
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const [userData, setUserData] = useState({
     name: '',
     email: '',
@@ -58,12 +60,16 @@ function App() {
     setIsNavigationOpen(true);
   }
 
+  const [isVisiblePreloader, setIsVisiblePreloader] = useState(false); 
+
   return (
     <AppContext.Provider value={{
       isLoggedIn,
       userData, 
+      isVisiblePreloader,
       setIsLoggedIn,
       setUserData, 
+      setIsVisiblePreloader,
      }}>
     <div className="App">
       <Routes>
@@ -78,6 +84,22 @@ function App() {
                 handleCloseClick={handleCloseNavigationClick}
               />
               <Main />
+            </main>
+            <Footer />
+          </>
+        } />
+        <Route path="/vacancy-search" element={
+          <>
+            <Header 
+              handleNavigationClick={handleOpenNavigationClick}
+            />
+            <main>
+              <Navigation 
+                isOpen={isNavigationOpen}
+                handleCloseClick={handleCloseNavigationClick}
+              />
+              {/* <Movies /> */}
+              <ProtectedRouteElement element={Movies} />
             </main>
             <Footer />
           </>
