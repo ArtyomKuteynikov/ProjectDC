@@ -9,6 +9,8 @@ import { AppContext } from '../../contexts/AppContext';
 
 
 const Movies = ({ windowWidth }) => {
+  const SHORT_DURATION = 60; // FIXME: delete it
+
   const addButtonParams = { // >769px
     first: 6,
     additional: 3,

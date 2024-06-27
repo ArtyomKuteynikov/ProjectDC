@@ -6,57 +6,57 @@ import { addToSavedMovies, removeFromFavourites, getSavedMovies } from '../../ut
 
 
 const MoviesCard = ({ movie, title, duration, imagePath, isSavedCards, savedImagePath }) => {
-  const context = useContext(AppContext);
-  const [isFavourite, setIsFavourite] = useState(false);
+  // const context = useContext(AppContext);
+  // const [isFavourite, setIsFavourite] = useState(false);
 
 
-  const { savedMovieList, setSavedMovieList } = context;
-  const { setIsVisiblePreloader } = context;
-  useEffect(() => {
-    // проверка на то, есть ли в массиве лайкнутых этот фильм
-    setIsFavourite(savedMovieList.find((savedMovie) => savedMovie.movieId === movie.id || savedMovie.movieId === movie.movieId ))
-    // первое для вкладки movies, второе для вкладки saved-movies
-  }, [movie.id, movie.movieId, savedMovieList]);
+  // const { savedMovieList, setSavedMovieList } = context;
+  // const { setIsVisiblePreloader } = context;
+  // useEffect(() => {
+  //   // проверка на то, есть ли в массиве лайкнутых этот фильм
+  //   setIsFavourite(savedMovieList.find((savedMovie) => savedMovie.movieId === movie.id || savedMovie.movieId === movie.movieId ))
+  //   // первое для вкладки movies, второе для вкладки saved-movies
+  // }, [movie.id, movie.movieId, savedMovieList]);
 
 
-  function addToFavourites() {
-    setIsVisiblePreloader(true)
-    addToSavedMovies(movie)
-      .then(() => {
-        setIsFavourite(true);
-      })
-      .finally(() => {
-        setIsVisiblePreloader(false)
-      })
-  }
+  // function addToFavourites() {
+  //   setIsVisiblePreloader(true)
+  //   addToSavedMovies(movie)
+  //     .then(() => {
+  //       setIsFavourite(true);
+  //     })
+  //     .finally(() => {
+  //       setIsVisiblePreloader(false)
+  //     })
+  // }
 
-  function deleteFromFavourites() {
-    setIsVisiblePreloader(true)
+  // function deleteFromFavourites() {
+  //   setIsVisiblePreloader(true)
 
-    if (!isSavedCards) {
-      getSavedMovies()
-        .then(savedMovies => {
-          movie._id = savedMovies.find(film => film.movieId === movie.id)._id;
-          removeFromFavourites(movie._id)
-            .then(() => {
-              setIsFavourite(false)
-              setSavedMovieList(savedMovieList.filter((item) => item._id !== movie._id));
-            })
-        })
-        .finally(() => {
-          setIsVisiblePreloader(false)
-        })
-    } else {
-      removeFromFavourites(movie._id)
-        .then(() => {
-          setIsFavourite(false)
-          setSavedMovieList(savedMovieList.filter((item) => item._id !== movie._id));
-        })
-        .finally(() => {
-          setIsVisiblePreloader(false)
-        })
-    }
-  }
+  //   if (!isSavedCards) {
+  //     getSavedMovies()
+  //       .then(savedMovies => {
+  //         movie._id = savedMovies.find(film => film.movieId === movie.id)._id;
+  //         removeFromFavourites(movie._id)
+  //           .then(() => {
+  //             setIsFavourite(false)
+  //             setSavedMovieList(savedMovieList.filter((item) => item._id !== movie._id));
+  //           })
+  //       })
+  //       .finally(() => {
+  //         setIsVisiblePreloader(false)
+  //       })
+  //   } else {
+  //     removeFromFavourites(movie._id)
+  //       .then(() => {
+  //         setIsFavourite(false)
+  //         setSavedMovieList(savedMovieList.filter((item) => item._id !== movie._id));
+  //       })
+  //       .finally(() => {
+  //         setIsVisiblePreloader(false)
+  //       })
+  //   }
+  // }
 
   return (
     <li className='card'>
@@ -67,7 +67,7 @@ const MoviesCard = ({ movie, title, duration, imagePath, isSavedCards, savedImag
         <p className='card__duration'>{duration}</p>
       </div>
       </a>
-      {
+      {/* {
         isSavedCards && (<button type='button' className='card__delete-button' onClick={ deleteFromFavourites }></button>)
       }{
       !isFavourite ? (<>
@@ -77,7 +77,7 @@ const MoviesCard = ({ movie, title, duration, imagePath, isSavedCards, savedImag
         : (!isSavedCards && <>
           <button type='button' className='card__saved-button' onClick={ deleteFromFavourites }></button>
         </>)
-      }
+      } */}
     </li>
   )
 }
