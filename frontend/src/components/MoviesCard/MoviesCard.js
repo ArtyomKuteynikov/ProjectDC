@@ -1,9 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import './MoviesCard.css';
-
-import { AppContext } from '../../contexts/AppContext';
-import { addToSavedMovies, removeFromFavourites, getSavedMovies } from '../../utils/MainApi';
-
 
 const MoviesCard = ({ movie, title, duration, imagePath, isSavedCards, savedImagePath }) => {
   // const context = useContext(AppContext);

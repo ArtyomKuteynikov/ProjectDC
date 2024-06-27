@@ -26,7 +26,7 @@ function App() {
   }
 
   // FIXME: isLoggedInInitially instead of boolean
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(isLoggedInInitially);
 
   const [userData, setUserData] = useState({
     name: '',
