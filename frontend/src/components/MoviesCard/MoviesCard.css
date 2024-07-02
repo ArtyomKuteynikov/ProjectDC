@@ -17,6 +17,15 @@
   margin: 12px 0 0;
 }
 
+.card__description {
+  color: #FFF;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+}
+
 .card__title {
   max-width: 250px;
   margin: 0 0 0 14px;

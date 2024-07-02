@@ -20,6 +20,7 @@ const MoviesCardList = ({ films, isSavedCards }) => {
             duration={normalizeDuration(film.duration)} 
             imagePath={!isSavedCards ? `https://api.nomoreparties.co/${film.image.url}` : film.image} 
             isSavedCards={isSavedCards}
+            description={film.description}
           />
         ))}
       </ul>

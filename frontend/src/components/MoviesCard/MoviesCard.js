@@ -1,7 +1,7 @@
 import React from 'react';
 import './MoviesCard.css';
 
-const MoviesCard = ({ movie, title, duration, imagePath, isSavedCards, savedImagePath }) => {
+const MoviesCard = ({ movie, title, duration, imagePath, isSavedCards, savedImagePath, description }) => {
   // const context = useContext(AppContext);
   // const [isFavourite, setIsFavourite] = useState(false);
 
@@ -54,14 +54,25 @@ const MoviesCard = ({ movie, title, duration, imagePath, isSavedCards, savedImag
   //   }
   // }
 
+  let shortDescription = description;
+  const descriptionMaxLength = 150;
+  if (description.length > descriptionMaxLength) {
+    shortDescription = shortDescription.slice(0, descriptionMaxLength);
+    if (shortDescription[descriptionMaxLength] !== ' ' && shortDescription[descriptionMaxLength - 1] !== ' ') {
+      shortDescription = shortDescription.slice(0, shortDescription.lastIndexOf(' '));
+    }
+    shortDescription += '...'
+  }
+
   return (
     <li className='card'>
       <a href={movie.trailerLink} target='_blank' rel="noreferrer" className='card__link'>
-      <img alt={title} src={imagePath} className='card__image'/>
+      {/* <img alt={title} src={imagePath} className='card__image'/> */}
       <div className='card__text'>
         <h2 className='card__title'>{title}</h2>
         <p className='card__duration'>{duration}</p>
       </div>
+      <p className='card__description'>{shortDescription}</p>
       </a>
       {/* {
         isSavedCards && (<button type='button' className='card__delete-button' onClick={ deleteFromFavourites }></button>)
