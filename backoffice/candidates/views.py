@@ -161,14 +161,14 @@ def create_cv(request):
 def cv_list_info(request):
     user_id = request.GET.get('id')
     cv_all = CV.objects.all().filter(user_id=user_id)
-    return JsonResponse(data={'cv': [{'spec': Spec.objects.filter(id=cv.applicant_spec_id), 'description': cv.description,
+    return JsonResponse(data={'cv': [{'spec': Spec.objects.filter(id=cv.applicant_spec_id).name, 'description': cv.description,
                                       'salary_min': cv.salary_min, 'salary_max': cv.salary_max}] for cv in cv_all}, status=200)
 
 @csrf_exempt
 def cv_info(request):
     cv_id = request.GET.get('id')
     cv = CV.objects.filter(id=cv_id)
-    return JsonResponse(data={'spec': Spec.objects.filter(id=cv.applicant_spec_id), 'description': cv.description,
+    return JsonResponse(data={'spec': Spec.objects.filter(id=cv.applicant_spec_id).name, 'description': cv.description,
                                      'salary_min': cv.salary_min, 'salary_max': cv.salary_max}, status=200)
 
 @csrf_exempt
@@ -177,7 +177,7 @@ def cv_detail(request):
     cv = CV.objects.filter(id=cv_id)
     education_list = Education.objects.all().filter(user_id=cv.user_id)
     experience_list = Experience.objects.all().filter(user_id=cv.user_id)
-    return JsonResponse(data={'cv': {'spec': Spec.objects.filter(id=cv.applicant_spec_id), 'description': cv.description,
+    return JsonResponse(data={'cv': {'spec': Spec.objects.filter(id=cv.applicant_spec_id).name, 'description': cv.description,
                                      'salary_min': cv.salary_min, 'salary_max': cv.salary_max},
                               'education': [{'university_name': education.university_name, 'faculty': education.faculty,
                                              'spec': Spec.objects.filter(id=education.spec_id).name, 'end_year': education.end_year} for education in education_list],
