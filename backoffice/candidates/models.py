@@ -11,7 +11,8 @@ class CV(models.Model):
     salary_min = models.IntegerField(verbose_name="Минимальная зарплата")
     salary_max = models.IntegerField(verbose_name="Максимальная зарплата")
 
-    created = models.DateTimeField(verbose_name="Создан")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
 
 class Education(models.Model):
     user_id = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name='Кандидат')

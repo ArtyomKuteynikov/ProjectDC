@@ -8,8 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from system.forms import CustomerForm
 
-from .models import Education, Experience
-from .forms import EducationForm, ExperienceForm
+from .models import Education, Experience, CV
+from .forms import EducationForm, ExperienceForm, CVForm
 
 @csrf_exempt
 def customer_info(request):
@@ -24,23 +24,23 @@ def customer_info(request):
 @csrf_exempt
 def education_list_info(request):
     user_id = request.GET.get('id')
-    education = Education.objects.all().filter(id=user_id)
-    return JsonResponse(data={'education': [{'university_name': university.university_name, 'faculty': university.faculty,
-                                             'spec': Spec.objects.filter(id=university.spec_id).name, 'end_year': university.end_year}] for university in education}, status=200)
+    education_list = Education.objects.all().filter(user_id=user_id)
+    return JsonResponse(data={'education': [{'university_name': education.university_name, 'faculty': education.faculty,
+                                             'spec': Spec.objects.filter(id=education.spec_id).name, 'end_year': education.end_year}] for education in education_list}, status=200)
 
 @csrf_exempt
 def experience_list_info(request):
     user_id = request.GET.get('id')
-    all_experience = Experience.objects.all().filter(id=user_id)
+    experience_list = Experience.objects.all().filter(user_id=user_id)
     return JsonResponse(data={'experience': [{'company': experience.company, 'position': experience.position, 'additional_info': experience.additional_info,
-                                              'start_date': experience.start_date, 'end_date': experience.end_date}] for experience in all_experience}, status=200)
+                                              'start_date': experience.start_date, 'end_date': experience.end_date}] for experience in experience_list}, status=200)
 
 @csrf_exempt
 def education_info(request):
-    university_id = request.GET.get('id')
-    university = Education.objects.filter(id=university_id)
-    return JsonResponse(data={'university_name': university.university_name, 'faculty': university.faculty,
-                                             'spec': Spec.objects.filter(id=university.spec_id).name, 'end_year': university.end_year}, status=200)
+    education_id = request.GET.get('id')
+    education = Education.objects.filter(id=education_id)
+    return JsonResponse(data={'university_name': education.university_name, 'faculty': education.faculty,
+                                             'spec': Spec.objects.filter(id=education.spec_id).name, 'end_year': education.end_year}, status=200)
 
 @csrf_exempt
 def experience_info(request):
@@ -142,3 +142,71 @@ def experience_delete(request):
     experience = get_object_or_404(Experience, pk=request.GET.get('id'))
     experience.delete()
     return JsonResponse(data={'status': True}, status=200)
+
+@csrf_exempt
+def create_cv(request):
+    customer_id = request.GET.get('id')
+    if request.method == 'POST':
+        form = CVForm(request.POST)
+        if request.headers['SECRET-SYSTEM'] != getenv('SECRET_SYSTEM'):
+            return HttpResponse({'status': False}, status=403)
+        if not form.is_valid():
+            return HttpResponse({'status': False}, status=400)
+        cv = form.save()
+        cv.user_id = customer_id
+        cv.save()
+        return JsonResponse(data={'status': True, 'cv': cv.id}, status=200)
+
+@csrf_exempt
+def cv_list_info(request):
+    user_id = request.GET.get('id')
+    cv_all = CV.objects.all().filter(user_id=user_id)
+    return JsonResponse(data={'cv': [{'spec': Spec.objects.filter(id=cv.applicant_spec_id), 'description': cv.description,
+                                      'salary_min': cv.salary_min, 'salary_max': cv.salary_max}] for cv in cv_all}, status=200)
+
+@csrf_exempt
+def cv_info(request):
+    cv_id = request.GET.get('id')
+    cv = CV.objects.filter(id=cv_id)
+    return JsonResponse(data={'spec': Spec.objects.filter(id=cv.applicant_spec_id), 'description': cv.description,
+                                     'salary_min': cv.salary_min, 'salary_max': cv.salary_max}, status=200)
+
+@csrf_exempt
+def cv_detail(request):
+    cv_id = request.GET.get('id')
+    cv = CV.objects.filter(id=cv_id)
+    education_list = Education.objects.all().filter(user_id=cv.user_id)
+    experience_list = Experience.objects.all().filter(user_id=cv.user_id)
+    return JsonResponse(data={'cv': {'spec': Spec.objects.filter(id=cv.applicant_spec_id), 'description': cv.description,
+                                     'salary_min': cv.salary_min, 'salary_max': cv.salary_max},
+                              'education': [{'university_name': education.university_name, 'faculty': education.faculty,
+                                             'spec': Spec.objects.filter(id=education.spec_id).name, 'end_year': education.end_year} for education in education_list],
+                              'experience': [{'company': experience.company, 'position': experience.position,
+                                              'additional_info': experience.additional_info,
+                                              'start_date': experience.start_date, 'end_date': experience.end_date} for experience in experience_list]}, status=200)
+
+@csrf_exempt
+def cv_update(request):
+    cv = get_object_or_404(CV, pk=request.GET.get('id'))
+    if request.method == 'POST':
+        form = CVForm(request.POST, instance=cv)
+        if request.headers['SECRET-SYSTEM'] != getenv('SECRET_SYSTEM'):
+            return HttpResponse({'status': False}, status=403)
+        if not form.is_valid():
+            return HttpResponse({'status': False}, status=400)
+        cv = form.save()
+        return JsonResponse(data={'status': True, 'cv': cv.id}, status=200)
+    else:
+        return HttpResponse({'status': False}, status=405)
+
+@csrf_exempt
+def experience_delete(request):
+    cv = get_object_or_404(CV, pk=request.GET.get('id'))
+    cv.delete()
+    return JsonResponse(data={'status': True}, status=200)
+
+@csrf_exempt
+def cv_list(request):
+    all_cv = CV.objects.all()
+    return JsonResponse(data={'cv': [{'spec': Spec.objects.filter(id=cv.applicant_spec_id), 'description': cv.description,
+                                      'salary_min': cv.salary_min, 'salary_max': cv.salary_max}] for cv in all_cv}, status=200)
