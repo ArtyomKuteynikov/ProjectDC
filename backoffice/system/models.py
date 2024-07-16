@@ -98,4 +98,4 @@ class HR(models.Model):
         verbose_name_plural = 'HRs'
 
     def __str__(self):
-        return f'{self.user.first_name} {self.user.last_name}'
+        return f'{self.customer.first_name} {self.customer.last_name}'

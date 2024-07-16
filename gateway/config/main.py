@@ -20,7 +20,6 @@ class Settings(BaseModel):
 
 
 async def fetch_data(route, method, **params):
-    print(*params)
     async with aiohttp.ClientSession() as session:
         if method == "GET":
             async with session.get(
