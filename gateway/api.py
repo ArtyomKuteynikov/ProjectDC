@@ -5,6 +5,7 @@ from fastapi_jwt_auth.exceptions import AuthJWTException
 from fastapi.responses import HTMLResponse, JSONResponse
 from config.main import Settings, SECRET_SYSTEM, URL, fetch_data
 from schemas.auth import SignUp, SignIn, RestorePassword
+from routes.system import router as router_system
 
 app = FastAPI(
     title="ProjectDC",
@@ -18,6 +19,8 @@ app.add_middleware(
     allow_headers=["Content-Type", "Set-Cookie", "Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
                    "Authorization"],
 )
+
+app.include_router(router_system)
 
 
 @AuthJWT.load_config
@@ -98,7 +101,7 @@ async def check_code(email: str, code: str, Authorize: AuthJWT = Depends()):
 
 
 @app.post("/v1/change_password", tags=['Account'])
-async def signup(data: RestorePassword, Authorize: AuthJWT = Depends()):
+async def change_password(data: RestorePassword, Authorize: AuthJWT = Depends()):
     Authorize.jwt_required()
     current_user = Authorize.get_jwt_subject()
     result = await fetch_data("authentification/reset_password/", "POST",
